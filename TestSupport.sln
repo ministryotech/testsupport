@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ministry.TestSupport", "Ministry.TestSupport\Ministry.TestSupport.csproj", "{00388568-5AD6-4E6A-822C-D44353B67222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ministry.TestSupport.Moq", "Ministry.TestSupport.Moq\Ministry.TestSupport.Moq.csproj", "{032FBE45-B7D4-4B08-BC5E-B745FA3686F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0EDC1443-319E-48A4-A0A4-F10737EBFD3C}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Projects", "Test Projects", "{8A1EA2F0-C33E-4AB5-893A-D89901B0E7B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTestTestProject", "tests\MSTestTestProject\MSTestTestProject.csproj", "{AD6BF011-085E-415C-9A4C-12B2C962EA29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestProject", "tests\NUnitTestProject\NUnitTestProject.csproj", "{AB173AD6-6D07-451C-9DC0-633C9FBEAB37}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{78E22BDC-DB8B-420E-8533-4E2AA23EBC7C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = TestSupport.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00388568-5AD6-4E6A-822C-D44353B67222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00388568-5AD6-4E6A-822C-D44353B67222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00388568-5AD6-4E6A-822C-D44353B67222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00388568-5AD6-4E6A-822C-D44353B67222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032FBE45-B7D4-4B08-BC5E-B745FA3686F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032FBE45-B7D4-4B08-BC5E-B745FA3686F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032FBE45-B7D4-4B08-BC5E-B745FA3686F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032FBE45-B7D4-4B08-BC5E-B745FA3686F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6BF011-085E-415C-9A4C-12B2C962EA29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6BF011-085E-415C-9A4C-12B2C962EA29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6BF011-085E-415C-9A4C-12B2C962EA29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6BF011-085E-415C-9A4C-12B2C962EA29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB173AD6-6D07-451C-9DC0-633C9FBEAB37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB173AD6-6D07-451C-9DC0-633C9FBEAB37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB173AD6-6D07-451C-9DC0-633C9FBEAB37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB173AD6-6D07-451C-9DC0-633C9FBEAB37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AD6BF011-085E-415C-9A4C-12B2C962EA29} = {8A1EA2F0-C33E-4AB5-893A-D89901B0E7B1}
+		{AB173AD6-6D07-451C-9DC0-633C9FBEAB37} = {8A1EA2F0-C33E-4AB5-893A-D89901B0E7B1}
+	EndGlobalSection
+EndGlobal

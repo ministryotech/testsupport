@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>The Ministry of Technology</authors>
+    <owners>The Ministry of Technology</owners>
+    <licenseUrl>http://www.opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://bitbucket.org/ministryotech/ministry.testsupport</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library of helpers for testing</description>
+    <copyright>Copyright 2014</copyright>
+    <tags>Test UnitTest NUnit MSTest Support Abstract Testing Session Framework Console Automation</tags>
+    <releaseNotes>No longer dependent on Ministry.Abstracts</releaseNotes>
+    <dependencies>
+      <dependency id="NUnit" version="2.6.3" />
+    </dependencies>
+  </metadata>
+</package>
