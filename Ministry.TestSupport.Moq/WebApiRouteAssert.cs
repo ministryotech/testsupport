@@ -53,7 +53,15 @@ namespace Ministry.TestSupport
         public void AssertRouteIsValid(string urlElement, Action<HttpConfiguration> apiRoutesRegisterFunction, string controller, string action)
         {
             var fullDummyUrl = GetFullDummyUrl(urlElement);
-            var maps = fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action);
+            var maps = true;
+            try
+            {
+                fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action);
+            }
+            catch
+            {
+                maps = false;
+            }
 
             assert.IsTrue(maps, "Route not valid");
         }
@@ -69,7 +77,15 @@ namespace Ministry.TestSupport
         public void AssertRouteIsValid(string urlElement, Action<HttpConfiguration> apiRoutesRegisterFunction, string controller, string action, HttpMethod verb)
         {
             var fullDummyUrl = GetFullDummyUrl(urlElement);
-            var maps = fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action, verb);
+            var maps = true;
+            try
+            {
+                fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action, verb);
+            }
+            catch
+            {
+                maps = false;
+            }
 
             assert.IsTrue(maps, "Route not valid");
         }
@@ -85,11 +101,10 @@ namespace Ministry.TestSupport
         public void AssertRouteIsInvalid(string urlElement, Action<HttpConfiguration> apiRoutesRegisterFunction, string controller, string action, HttpMethod verb)
         {
             var fullDummyUrl = GetFullDummyUrl(urlElement);
-            var maps = false;
-
+            var maps = true;
             try
             {
-                maps = fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action, verb);
+                fullDummyUrl.ShouldMapTo(apiRoutesRegisterFunction, controller, action, verb);
             }
             catch
             {

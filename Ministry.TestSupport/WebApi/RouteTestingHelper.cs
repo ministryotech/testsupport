@@ -71,9 +71,9 @@ namespace Ministry.TestSupport.WebApi
         /// <param name="action">The action.</param>
         /// <param name="parameterNames">The parameter names.</param>
         /// <returns></returns>
-        public static bool ShouldMapTo<TController>(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string action, params string[] parameterNames)
+        public static void ShouldMapTo<TController>(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string action, params string[] parameterNames)
         {
-            return ShouldMapTo<TController>(fullDummyUrl, apiRoutesRegisterFunction, action, HttpMethod.Get, parameterNames);
+            ShouldMapTo<TController>(fullDummyUrl, apiRoutesRegisterFunction, action, HttpMethod.Get, parameterNames);
         }
 
         /// <summary>
@@ -88,10 +88,10 @@ namespace Ministry.TestSupport.WebApi
         /// <returns></returns>
         /// <exception cref="System.Exception">
         /// </exception>
-        public static bool ShouldMapTo<TController>(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string action, HttpMethod httpMethod, params string[] parameterNames)
+        public static void ShouldMapTo<TController>(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string action, HttpMethod httpMethod, params string[] parameterNames)
         {
             var controllerName = typeof(TController).Name;
-            return ShouldMapTo(fullDummyUrl, apiRoutesRegisterFunction, controllerName, action, httpMethod, parameterNames);
+            ShouldMapTo(fullDummyUrl, apiRoutesRegisterFunction, controllerName, action, httpMethod, parameterNames);
         }
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace Ministry.TestSupport.WebApi
         /// <returns></returns>
         /// <exception cref="System.Exception">
         /// </exception>
-        public static bool ShouldMapTo(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string controllerName, string action, params string[] parameterNames)
+        public static void ShouldMapTo(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string controllerName, string action, params string[] parameterNames)
         {
-            return ShouldMapTo(fullDummyUrl, apiRoutesRegisterFunction, controllerName, action, HttpMethod.Get, parameterNames);
+            ShouldMapTo(fullDummyUrl, apiRoutesRegisterFunction, controllerName, action, HttpMethod.Get, parameterNames);
         }
 
         /// <summary>
@@ -122,13 +122,22 @@ namespace Ministry.TestSupport.WebApi
         /// <returns></returns>
         /// <exception cref="System.Exception">
         /// </exception>
-        public static bool ShouldMapTo(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string controllerName, string action, HttpMethod httpMethod, params string[] parameterNames)
+        public static void ShouldMapTo(this string fullDummyUrl, Action<HttpConfiguration> apiRoutesRegisterFunction, string controllerName, string action, HttpMethod httpMethod, params string[] parameterNames)
         {
             var request = new HttpRequestMessage(httpMethod, fullDummyUrl);
             var config = new HttpConfiguration();
             apiRoutesRegisterFunction(config);
 
-            var route = RouteRequest(config, request);
+            RouteInfo route;
+
+            try
+            {
+                route = RouteRequest(config, request);
+            }
+            catch (HttpResponseException hrex)
+            {
+                throw new Exception(String.Format("The specified route '{0}' generated an HTTP Response Error '{1}'", fullDummyUrl, hrex.Response.ReasonPhrase));
+            }
 
             if (route.Controller.Name != controllerName)
                 throw new Exception(String.Format("The specified route '{0}' does not match the expected controller '{1}'", fullDummyUrl, controllerName));
@@ -136,7 +145,7 @@ namespace Ministry.TestSupport.WebApi
             if (route.Action.ToLowerInvariant() != action.ToLowerInvariant())
                 throw new Exception(String.Format("The specified route '{0}' does not match the expected action '{1}'", fullDummyUrl, action));
 
-            if (!parameterNames.Any()) return true;
+            if (!parameterNames.Any()) return;
 
             if (route.Parameters.Count < parameterNames.Count())
                 throw new Exception(
@@ -151,8 +160,6 @@ namespace Ministry.TestSupport.WebApi
                         String.Format("The specified route '{0}' does not contain the expected parameter '{1}'",
                             fullDummyUrl, param));
             }
-
-            return true;
         }
 
         #endregion

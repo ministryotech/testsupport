@@ -12,7 +12,7 @@
     <description>Library of helpers for testing</description>
     <copyright>Copyright 2014</copyright>
     <tags>Test UnitTest NUnit MSTest Support Abstract Testing Session Framework Console Automation</tags>
-    <releaseNotes>No longer dependent on Ministry.Abstracts</releaseNotes>
+    <releaseNotes>Reworked ShouldMapTo to return void and catch Response exceptions</releaseNotes>
     <dependencies>
       <dependency id="NUnit" version="2.6.3" />
     </dependencies>

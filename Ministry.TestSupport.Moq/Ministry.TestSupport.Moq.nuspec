@@ -11,10 +11,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library of helpers for testing using the Moq mocking framework</description>
     <copyright>Copyright 2014</copyright>
-    <releaseNotes>No longer dependent on Ministry.Abstracts</releaseNotes>
     <tags>Test UnitTest NUnit MSTest Moq Mock Support Abstract MVC Routing Route Testing HttpContext Session Framework Console Automation</tags>
+    <releaseNotes>Reworked ShouldMapTo to return void and catch Response exceptions</releaseNotes>
     <dependencies>
-      <dependency id="Ministry.TestSupport" version="1.0.1.0" />
+      <dependency id="Ministry.TestSupport" version="1.0.1.1" />
       <dependency id="Moq" version="4.2.1402" />
     </dependencies>
   </metadata>
