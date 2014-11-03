@@ -1,2 +1,13 @@
 *.nupkg
 packages/
+.nuget/
+tests/MSTestTestProject/bin/
+*/obj/
+tests/NUnitTestProject/bin/
+tests/MSTestTestProject/obj/
+Ministry.TestSupport/bin/
+Ministry.TestSupport.Moq/bin/
+tests/NUnitTestProject/obj/
+*.user
+TestResults/
+*.suo
