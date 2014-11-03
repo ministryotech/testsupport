@@ -17,8 +17,8 @@ Most of our content is stored on BitBucket, but we also do some Umbraco related 
 ### Where can I get it? ###
 You can download the package for this project from any of the following package managers...
 
-- **NUGET (Primary Library)** - * [https://nuget.org/packages/Ministry.TestSupport](https://nuget.org/packages/Ministry.TestSupport)
-- **NUGET (Moq Support)** - * [https://nuget.org/packages/Ministry.TestSupport.Moq](https://nuget.org/packages/Ministry.TestSupport.Moq)
+- **NUGET (Primary Library)** - [https://nuget.org/packages/Ministry.TestSupport](https://nuget.org/packages/Ministry.TestSupport)
+- **NUGET (Moq Support)** - [https://nuget.org/packages/Ministry.TestSupport.Moq](https://nuget.org/packages/Ministry.TestSupport.Moq)
 
 ### Contribution guidelines ###
 If you would like to contribute to the project, please contact me.
