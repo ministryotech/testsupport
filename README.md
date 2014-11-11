@@ -186,7 +186,7 @@ Creating a route test is very straightforward. By inheriting from TouteTestBase,
 1. Override the 'TestSupportFactory' property with the implementation for your testing framework of choice with mocks.
 2. Override 'SetupFixture()' and ensure it's decorated to run at the beginning of the fixture or test class. It should read something like this and ensure that the Routes property is populated from the application...
 
-```C#
+```
 #!csharp
 [TestFixtureSetUp]
 public override void SetUpFixture()
