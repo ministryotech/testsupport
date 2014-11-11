@@ -65,7 +65,7 @@ public interface IAssertionFramework
 
 The IAssertionFramework interface allows the actual testing framework used to be abstracted out until the point at which the actual test is written. At the time of writing there are two implementations included for this interface, one for NUnit and one for MSTest (located in the NUnit and MSTest namespaces respectively). Support for other frameworks may be added later, but it is a goal of the project to maintain feature parity for both NUnit and MSTest throughout and to minimise code duplication. Abstracting the framework enables this goal.
 
-The assertion framework implementation can either be instantiated directly or via an implementation of the [[ISupportFactory]] interface.
+The assertion framework implementation can either be instantiated directly or via an implementation of the ISupportFactory interface.
 
 ###New Assertions###
 The assertion abstraction also introduces the 'AreCaseInsensitiveEqual' assertion, which allows you to assert that two objects are identical by their string representation regardless of case. This makes writing tests for things like MVC Routing a lot smaller.
@@ -183,8 +183,8 @@ This is a straightforward class which simply takes an instance of IAssertionFram
 ###RouteTestBase###
 Creating a route test is very straightforward. By inheriting from TouteTestBase, you get shorthand local assertion methods that call through to the MvcRouteAsserter. There are some key things to do to set up a route test for your application, as follows...
 
-# Override the 'TestSupportFactory' property with the implementation for your testing framework of choice with mocks.
-# Override 'SetupFixture()' and ensure it's decorated to run at the beginning of the fixture or test class. It should read something like this and ensure that the Routes property is populated from the application...
+1. Override the 'TestSupportFactory' property with the implementation for your testing framework of choice with mocks.
+2. Override 'SetupFixture()' and ensure it's decorated to run at the beginning of the fixture or test class. It should read something like this and ensure that the Routes property is populated from the application...
 
 ```
 #!csharp
