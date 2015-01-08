@@ -159,16 +159,30 @@ The base class also provides some custom assertions to make the process even eas
 ##Mocking HttpContext##
 Mocking HttpContext is a persistent problem for web developers. Ministry.TestSupport.Moq offers a very simple mocking solution for HttpContext. It's fairly limited but should suffice in 80% of cases.
 
-###MockHttpContextBuilder###
-The static builder class returns constructed mock objects for...
+###MockHttpContext###
+The library contains objects for MockHttpContext, MockHttpRequest and MockHttpResponse. These are managed through various optional constructors.
 
-* HttpContext
-* HttpRequest
-* HttpResponse
+The classes inherit from Mock<??> directly enabling to to adapt the retained objects to setup any specific additional mocking and verification that you need.
 
-It also has a direct object return method called 'CreateHttpContext'. In either case, various parameters are supported.
+The returned Mock objects contain collections and mthods to mock and stub common elements of context. Please raise an issue if you find a test need that this doesn't cover, as I'd like to expand this to cover as much as possible.
 
-Please raise an issue if you find a test need that this doesn't cover, as I'd like to expand this to cover as much as possible
+The MockHttpContext object also has an 'ApplyTo' method so you can add it to a controller when testing MVC controllers. For example...
+
+```
+#!csharp
+[Test]
+public override void TestController()
+{
+   // Create a default context with a default request and response
+   var mockContext = new MockHttpContext();
+
+   // Create the controller to test
+   var objUt = new HomeController();
+
+   // Apply the context.
+   mockContext.ApplyTo(objUt);
+}
+```
 
 ##Testing Routes in ASP.Net MVC##
 Ministry.TestingSupport offers a simple solution to make route testing, for both incoming and outgoing routes, really clean and simple. This is achieved through the use of two classes. The primary class is the 'MvcRouteAsserter', an instance of which is provided by the ISupportFactoryWithMocks implementation for your chosen testing framework. Moq is required for this to work at the moment but if you would like this for your chosen mocking framework feel free to join the project and add support or raise an issue and I'll add support when I can.

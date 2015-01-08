@@ -11,6 +11,7 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,10 @@ using Moq;
 
 namespace Ministry.TestSupport.Mocks
 {
+    /// <summary>
+    /// Builder for contexts
+    /// </summary>
+    [Obsolete("The MockHttpContext, MockHttpRequest and MockHttpResponse objects are best used directly through their constructors.")]
     public static class MockHttpContextBuilder
     {
         #region | Mock Return Methods |
@@ -30,10 +35,7 @@ namespace Ministry.TestSupport.Mocks
         /// </returns>
         public static Mock<HttpContextBase> MockHttpContext()
         {
-            var mockContext = new Mock<HttpContextBase>();
-            mockContext.Setup(x => x.Request).Returns(new Mock<HttpRequestBase>().Object);
-            mockContext.Setup(x => x.Response).Returns(MockHttpResponse().Object);
-            return mockContext;
+            return new MockHttpContext();
         }
         /// <summary>
         /// Creates a mock context for a given URL.
@@ -44,12 +46,9 @@ namespace Ministry.TestSupport.Mocks
         /// A Mock context.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "Not valid on Http Mocking")]
-        public static Mock<HttpContextBase> MockHttpContext(string url, HttpVerbs verb = HttpVerbs.Get)
+        public static MockHttpContext MockHttpContext(string url, HttpVerbs verb = HttpVerbs.Get)
         {
-            var mockContext = new Mock<HttpContextBase>();
-            mockContext.Setup(x => x.Request).Returns(MockHttpRequest(url, verb).Object);
-            mockContext.Setup(x => x.Response).Returns(MockHttpResponse().Object);
-            return mockContext;
+            return new MockHttpContext(MockHttpRequest(url, verb));
         }
 
         /// <summary>
@@ -61,24 +60,18 @@ namespace Ministry.TestSupport.Mocks
         /// A Mock request.
         /// </returns>
         [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", Justification = "Not valid on Http Mocking")]
-        public static Mock<HttpRequestBase> MockHttpRequest(string url, HttpVerbs verb = HttpVerbs.Get)
+        public static MockHttpRequest MockHttpRequest(string url, HttpVerbs verb = HttpVerbs.Get)
         {
-            var mockRequest = new Mock<HttpRequestBase>();
-            mockRequest.Setup(x => x.AppRelativeCurrentExecutionFilePath).Returns(url);
-            mockRequest.Setup(x => x.HttpMethod).Returns(verb.ToString());
-            return mockRequest;
+            return new MockHttpRequest(url, verb);
         }
 
         /// <summary>
         /// Creates a mock response.
         /// </summary>
-        /// <param name="url">The URL to mock the response for.</param>
         /// <returns>A Mock response.</returns>
-        public static Mock<HttpResponseBase> MockHttpResponse()
+        public static MockHttpResponse MockHttpResponse()
         {
-            var mockResponse = new Mock<HttpResponseBase>();
-            mockResponse.Setup(x => x.ApplyAppPathModifier(It.IsAny<string>())).Returns<string>(x => x);
-            return mockResponse;
+            return new MockHttpResponse();
         }
 
         #endregion
