@@ -12,7 +12,7 @@
     <description>Library of helpers for testing using the Moq mocking framework</description>
     <copyright>Copyright 2014</copyright>
     <tags>Test UnitTest NUnit MSTest Moq Mock Support Abstract MVC Routing Route Testing HttpContext Session Framework Console Automation</tags>
-    <releaseNotes>Introduced more advanced HttpContext Mocking classes</releaseNotes>
+    <releaseNotes>Removed NuGet MVC Package references due to issues with installs</releaseNotes>
     <dependencies>
       <dependency id="Ministry.TestSupport" version="1.0.1.1" />
       <dependency id="Moq" version="4.2.1402" />
