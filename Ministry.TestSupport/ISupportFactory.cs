@@ -16,6 +16,18 @@ namespace Ministry.TestSupport
     /// <summary>
     /// Factory interface for different implementations of the helpers.
     /// </summary>
+    /// <remarks>To use this you will need to create a Support Factory implementation for your chosen unit testing framework.</remarks>
+    /// <example>
+    ///    public class NUnitSupportFactory : ISupportFactory
+    ///    {
+    ///        public NUnitSupportFactory()
+    ///        {
+    ///            AssertionFramework = new NUnitAssertionFramework();
+    ///        }
+    /// 
+    ///        public IAssertionFramework AssertionFramework { get; private set; }
+    ///    }
+    /// </example>
     public interface ISupportFactory
     {
         /// <summary>

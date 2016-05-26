@@ -14,8 +14,6 @@
 using System;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace Ministry.TestSupport
 {
@@ -47,7 +45,7 @@ namespace Ministry.TestSupport
         /// <value>
         /// The test support factory.
         /// </value>
-        protected abstract ISupportFactoryWithMocks TestSupportFactory { get; }
+        protected virtual ISupportFactoryWithMocks TestSupportFactory { get; set; }
 
         #endregion
 

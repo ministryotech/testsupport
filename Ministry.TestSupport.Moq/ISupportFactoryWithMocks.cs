@@ -16,6 +16,22 @@ namespace Ministry.TestSupport
     /// <summary>
     /// Factory interface for different implementations of the helpers.
     /// </summary>
+    /// <remarks>To use this you will need to create a Suppert Factory implementation for your chosen unit testing framework.</remarks>
+    /// <example>
+    ///    public class NUnitSupportFactory : ISupportFactoryWithMocks
+    ///    {
+    ///        public NUnitSupportFactory()
+    ///        {
+    ///            AssertionFramework = new NUnitAssertionFramework();
+    ///            RouteAssert = new MvcRouteAsserter(AssertionFramework);
+    ///            ApiRouteAssert = new WebApiRouteAsserter(AssertionFramework);
+    ///        }
+    /// 
+    ///        public IAssertionFramework AssertionFramework { get; private set; }
+    ///        public MvcRouteAsserter RouteAssert { get; private set; }
+    ///        public WebApiRouteAsserter ApiRouteAssert { get; private set; }
+    ///    }
+    /// </example>
     public interface ISupportFactoryWithMocks : ISupportFactory
     {
         /// <summary>

@@ -45,6 +45,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MSTest\MSTestAssertionFramework.cs" />
+    <Compile Include="MSTest\MSTestConsoleTestBase.cs" />
+    <Compile Include="MSTest\MSTestSupportFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConsoleTestClass.cs" />
   </ItemGroup>

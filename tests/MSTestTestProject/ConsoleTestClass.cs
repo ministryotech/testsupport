@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ministry.TestSupport.MSTest;
 
 namespace MSTestTestProject
 {
@@ -26,7 +25,7 @@ namespace MSTestTestProject
 
         protected override string AppFileName
         {
-            get { return @"C:\Development\Projects\Ministry OSS\testsupport\tests\printhello.bat"; }
+            get { return @"C:\Development\OSS\testsupport\tests\printhello.bat"; }
         }
     }
 }

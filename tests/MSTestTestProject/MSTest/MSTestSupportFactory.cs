@@ -11,19 +11,21 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Ministry.TestSupport.NUnit
+using Ministry.TestSupport;
+
+namespace MSTestTestProject
 {
     /// <summary>
-    /// Factory class for providing NUnit implementations of the helpers.
+    /// Factory class for providing MSTest implementations of the helpers.
     /// </summary>
-    public class NUnitSupportFactory : ISupportFactory
+    public class MSTestSupportFactory : ISupportFactory
     {
         /// <summary>
-        /// Initializes the <see cref="NUnitSupportFactory"/> class.
+        /// Initializes the <see cref="MSTestSupportFactory"/> class.
         /// </summary>
-        public NUnitSupportFactory()
+        public MSTestSupportFactory()
         {
-            AssertionFramework = new NUnitAssertionFramework();
+            AssertionFramework = new MSTestAssertionFramework();
         }
 
         /// <summary>

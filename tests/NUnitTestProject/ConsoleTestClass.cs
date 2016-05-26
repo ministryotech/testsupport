@@ -1,5 +1,4 @@
-﻿using Ministry.TestSupport.NUnit;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace NUnitTestProject
 {
@@ -26,7 +25,7 @@ namespace NUnitTestProject
 
         protected override string AppFileName
         {
-            get { return @"C:\Development\Projects\Ministry OSS\testsupport\tests\printhello.bat"; }
+            get { return @"C:\Development\OSS\testsupport\tests\printhello.bat"; }
         }
     }
 }

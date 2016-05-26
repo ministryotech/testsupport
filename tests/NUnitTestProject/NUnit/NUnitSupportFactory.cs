@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2014 Minotech Ltd.
+﻿// Copyright (c) 2012 Minotech Ltd.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
 // (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, 
@@ -11,31 +11,27 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Ministry.TestSupport.MSTest
+using Ministry.TestSupport;
+
+namespace NUnitTestProject
 {
     /// <summary>
-    /// Factory class for providing MSTest implementations of the helpers.
+    /// Factory class for providing NUnit implementations of the helpers.
     /// </summary>
-    public class MSTestSupportFactoryWithMocks : MSTestSupportFactory, ISupportFactoryWithMocks
+    public class NUnitSupportFactory : ISupportFactory
     {
         /// <summary>
-        /// Initializes the <see cref="MSTestSupportFactoryWithMocks"/> class.
+        /// Initializes the <see cref="NUnitSupportFactory"/> class.
         /// </summary>
-        public MSTestSupportFactoryWithMocks() 
-            : base()
+        public NUnitSupportFactory()
         {
-            RouteAssert = new MvcRouteAsserter(AssertionFramework);
-            ApiRouteAssert = new WebApiRouteAsserter(AssertionFramework);
+            AssertionFramework = new NUnitAssertionFramework();
         }
 
         /// <summary>
-        /// Gets the route asserter.
+        /// Gets the assertion framework.
         /// </summary>
-        public MvcRouteAsserter RouteAssert { get; private set; }
+        public IAssertionFramework AssertionFramework { get; private set; }
 
-        /// <summary>
-        /// Gets the API route asserter.
-        /// </summary>
-        public WebApiRouteAsserter ApiRouteAssert { get; private set; }
     }
 }

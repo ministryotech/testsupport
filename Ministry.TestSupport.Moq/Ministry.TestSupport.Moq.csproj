@@ -45,10 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
@@ -90,20 +86,12 @@
     <Compile Include="Mocks\MockHttpContext.cs" />
     <Compile Include="Mocks\MockHttpRequest.cs" />
     <Compile Include="Mocks\MockHttpResponse.cs" />
-    <Compile Include="MSTest\MSTestSupportFactoryWithMocks.cs" />
     <Compile Include="WebApiRouteTestBase.cs" />
     <Compile Include="WebApiRouteAssert.cs" />
-    <Compile Include="NUnit\NUnitSupportFactoryWithMocks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mocks\MockHttpContextBuilder.cs" />
     <Compile Include="MvcRouteAssert.cs" />
-    <Compile Include="RouteTestBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ministry.TestSupport\Ministry.TestSupport.csproj">
-      <Project>{00388568-5AD6-4E6A-822C-D44353B67222}</Project>
-      <Name>Ministry.TestSupport</Name>
-    </ProjectReference>
+    <Compile Include="MvcRouteTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Ministry.TestSupport.Moq.nuspec">
@@ -111,7 +99,12 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Ministry.TestSupport\Ministry.TestSupport.csproj">
+      <Project>{00388568-5ad6-4e6a-822c-d44353b67222}</Project>
+      <Name>Ministry.TestSupport</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

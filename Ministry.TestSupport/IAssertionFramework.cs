@@ -16,6 +16,81 @@ namespace Ministry.TestSupport
     /// <summary>
     /// An Interface to wrap common assertion tasks of different unit testing frameworks.
     /// </summary>
+    /// <remarks>To use this you will need to create an Asertion Framework implementation for your chosen unit testing framework to pas through the assertion calls.</remarks>
+    /// <example>
+    /// public class NUnitAssertionFramework : IAssertionFramework
+    /// {
+    ///     public void IsNull<T>(T anObject)
+    ///     {
+    ///         Assert.IsNull(anObject);
+    ///     }
+
+    ///     public void IsNull<T>(T anObject, string message)
+    ///     {
+    ///         Assert.IsNull(anObject, message);
+    ///     }
+
+    ///     public void IsNotNull<T>(T anObject)
+    ///     {
+    ///         Assert.IsNotNull(anObject);
+    ///     }
+
+    ///     public void IsNotNull<T>(T anObject, string message)
+    ///     {
+    ///         Assert.IsNotNull(anObject, message);
+    ///     }
+
+    ///     public void IsTrue(bool condition)
+    ///     {
+    ///         Assert.IsTrue(condition);
+    ///     }
+
+    ///     public void IsTrue(bool condition, string message)
+    ///     {
+    ///         Assert.IsTrue(condition, message);
+    ///     }
+
+    ///     public void IsTrue(bool condition, string message, params object[] args)
+    ///     {
+    ///         Assert.IsTrue(condition, message, args);
+    ///     }
+
+    ///     public void IsFalse(bool condition)
+    ///     {
+    ///         Assert.IsFalse(condition);
+    ///     }
+
+    ///     public void IsFalse(bool condition, string message)
+    ///     {
+    ///         Assert.IsFalse(condition, message);
+    ///     }
+
+    ///     public void IsFalse(bool condition, string message, params object[] args)
+    ///     {
+    ///         Assert.IsFalse(condition, message, args);
+    ///     }
+
+    ///     public void AreEqual<T>(T expected, T actual)
+    ///     {
+    ///         Assert.AreEqual(expected, actual);
+    ///     }
+
+    ///     public void AreEqual<T>(T expected, T actual, string message)
+    ///     {
+    ///         Assert.AreEqual(expected, actual, message);
+    ///     }
+
+    ///     public void AreCaseInsensitiveEqual<T>(T expected, T actual)
+    ///     {
+    ///         Assert.True(expected.IsCaseInsensitiveEqualTo(actual), "The values '" + expected + "' and '" + actual + "' differ by more than case.");
+    ///     }
+
+    ///     public void AreCaseInsensitiveEqual<T>(T expected, T actual, string message)
+    ///     {
+    ///         Assert.True(expected.IsCaseInsensitiveEqualTo(actual), message + "\nThe values '" + expected + "' and '" + actual + "' differ by more than case.");
+    ///     }
+    /// }
+    /// </example>
     public interface IAssertionFramework
     {
         #region | IsNull |

@@ -74,13 +74,13 @@ namespace Ministry.TestSupport
         /// <param name="verb">The verb.</param>
         public void AssertRouteIsValid(string urlElement, RouteCollection routes, string controller, string action, string area = "", HttpVerbs verb = HttpVerbs.Get)
         {
-            var httpContextMock = MockHttpContextBuilder.CreateHttpContext(urlElement, verb);
+            var httpContextMock = new MockHttpContext(new MockHttpRequest(urlElement, verb));
 
-            RouteData routeData = routes.GetRouteData(httpContextMock);
+            RouteData routeData = routes.GetRouteData(httpContextMock.Object);
             assert.IsNotNull(routeData, "Should have found the route");
             assert.AreCaseInsensitiveEqual(controller, routeData.Values["controller"], "Expected a different controller");
             assert.AreCaseInsensitiveEqual(action, routeData.Values["action"], "Expected a different action");
-            if (area != String.Empty) assert.AreCaseInsensitiveEqual(area, routeData.Values["area"], "Expected a different area");
+            if (area != string.Empty) assert.AreCaseInsensitiveEqual(area, routeData.Values["area"], "Expected a different area");
         }
 
         /// <summary>
@@ -95,13 +95,13 @@ namespace Ministry.TestSupport
         /// <param name="routeProperties">The route properties to assert.</param>
         public void AssertRouteIsValid(string urlElement, RouteCollection routes, string controller, string action, string area, HttpVerbs verb, object routeProperties)
         {
-            var httpContextMock = MockHttpContextBuilder.CreateHttpContext(urlElement, verb);
+            var httpContextMock = new MockHttpContext(new MockHttpRequest(urlElement, verb));
 
-            RouteData routeData = routes.GetRouteData(httpContextMock);
+            RouteData routeData = routes.GetRouteData(httpContextMock.Object);
             assert.IsNotNull(routeData, "Should have found the route");
             assert.AreCaseInsensitiveEqual(controller, routeData.Values["controller"], "Expected a different controller");
             assert.AreCaseInsensitiveEqual(action, routeData.Values["action"], "Expected a different action");
-            if (area != String.Empty) assert.AreCaseInsensitiveEqual(area, routeData.Values["area"], "Expected a different area");
+            if (area != string.Empty) assert.AreCaseInsensitiveEqual(area, routeData.Values["area"], "Expected a different area");
 
             if (routeProperties != null)
             {
@@ -125,10 +125,10 @@ namespace Ministry.TestSupport
         /// <param name="routes">The route collection.</param>
         public void AssertRouteIsInvalid(string urlElement, RouteCollection routes)
         {
-            var httpContextMock = MockHttpContextBuilder.CreateHttpContext(urlElement);
-            var resultString = String.Empty;
+            var httpContextMock = new MockHttpContext(new MockHttpRequest(urlElement));
+            var resultString = string.Empty;
 
-            RouteData routeData = routes.GetRouteData(httpContextMock);
+            RouteData routeData = routes.GetRouteData(httpContextMock.Object);
             if (routeData != null)
             {
                 var result = new StringBuilder("Should not have found the route, but found...");
@@ -143,7 +143,7 @@ namespace Ministry.TestSupport
                 resultString = result.ToString();
             }
 
-            assert.IsNull(routeData,  resultString);
+            assert.IsNull(routeData, resultString);
         }
 
         /// <summary>
@@ -157,9 +157,9 @@ namespace Ministry.TestSupport
         /// <param name="routeProperties">The route properties.</param>
         public void AssertOutgoingRouteUrlGeneration(string expectedUrl, RouteCollection routes, string controller, string action, string routeName = null, object routeProperties = null)
         {
-            var context = new RequestContext(MockHttpContextBuilder.CreateHttpContext(), new RouteData());
+            var context = new RequestContext(new MockHttpContext().Object, new RouteData());
             RouteValueDictionary routeValues = null;
-            
+
             if (routeProperties != null) routeValues = new RouteValueDictionary(routeProperties);
 
             string result = UrlHelper.GenerateUrl(routeName, action, controller, routeValues, routes, context, true);

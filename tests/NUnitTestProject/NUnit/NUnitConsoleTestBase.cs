@@ -11,9 +11,10 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Ministry.TestSupport;
 using NUnit.Framework;
 
-namespace Ministry.TestSupport.NUnit
+namespace NUnitTestProject
 {
     /// <summary>
     /// A base class to provide elements for interracting with a Console Application.
@@ -26,7 +27,7 @@ namespace Ministry.TestSupport.NUnit
         /// <summary>
         /// Sets up the test fixture to capture the output of the console app.
         /// </summary>
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public override void FixtureSetUp()
         {
             base.FixtureSetUp();
@@ -35,7 +36,7 @@ namespace Ministry.TestSupport.NUnit
         /// <summary>
         /// Returns the output stream to normal.
         /// </summary>
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public override void FixtureTearDown()
         {
             base.FixtureTearDown();

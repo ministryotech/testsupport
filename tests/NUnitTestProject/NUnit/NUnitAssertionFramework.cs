@@ -11,14 +11,15 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ministry.TestSupport;
+using NUnit.Framework;
 
-namespace Ministry.TestSupport.MSTest
+namespace NUnitTestProject
 {
     /// <summary>
-    /// MSTest asserton wrapper for test linked methods.
+    /// NUnit assertion wrapper for test linked methods.
     /// </summary>
-    public class MSTestAssertionFramework : IAssertionFramework
+    public class NUnitAssertionFramework : IAssertionFramework
     {
         #region | IsNull |
 
@@ -188,7 +189,7 @@ namespace Ministry.TestSupport.MSTest
         /// <param name="actual">The actual value.</param>
         public void AreCaseInsensitiveEqual<T>(T expected, T actual)
         {
-            Assert.IsTrue(expected.IsCaseInsensitiveEqualTo(actual), "The values '" + expected + "' and '" + actual + "' differ by more than case.");
+            Assert.True(expected.IsCaseInsensitiveEqualTo(actual), "The values '" + expected + "' and '" + actual + "' differ by more than case.");
         }
 
         /// <summary>
@@ -202,7 +203,7 @@ namespace Ministry.TestSupport.MSTest
         /// <param name="message">The message to display in case of failure.</param>
         public void AreCaseInsensitiveEqual<T>(T expected, T actual, string message)
         {
-            Assert.IsTrue(expected.IsCaseInsensitiveEqualTo(actual), message + "\nThe values '" + expected + "' and '" + actual + "' differ by more than case.");
+            Assert.True(expected.IsCaseInsensitiveEqualTo(actual), message + "\nThe values '" + expected + "' and '" + actual + "' differ by more than case.");
         }
 
         #endregion

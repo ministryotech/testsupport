@@ -12,8 +12,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ministry.TestSupport;
 
-namespace Ministry.TestSupport.MSTest
+namespace MSTestTestProject
 {
     /// <summary>
     /// A base class to provide elements for interracting with a Console Application.

@@ -11,6 +11,7 @@
 // FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -19,7 +20,14 @@ namespace Ministry.TestSupport
     /// <summary>
     /// A base class to enable easy testing of MVC Routes
     /// </summary>
-    public abstract class RouteTestBase
+    [Obsolete("This class has been deprecated. Use Ministry.TestSupport.MvcRouteTestBase instead")]
+    public abstract class RouteTestBase : MvcRouteTestBase
+    { }
+
+    /// <summary>
+    /// A base class to enable easy testing of MVC Routes
+    /// </summary>
+    public abstract class MvcRouteTestBase
     {
         #region | Setup & TearDown |
 
@@ -49,7 +57,7 @@ namespace Ministry.TestSupport
         /// <value>
         /// The test support factory.
         /// </value>
-        protected abstract ISupportFactoryWithMocks TestSupportFactory { get; }
+        protected virtual ISupportFactoryWithMocks TestSupportFactory { get; set; }
 
         #endregion
 
