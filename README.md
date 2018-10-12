@@ -8,13 +8,10 @@ Most of this functionality is ether accessed via base classes or via an implemen
 
 The ISupportFactory interface exposes the accessible instances for a given test usage implementation at the lowest possible level.  The base interface looks like this...
 
-```
-#!csharp
-public interface ISupportFactory
-{
-	IAssertionFramework AssertionFramework { get; }
-}
-```
+	public interface ISupportFactory
+	{
+		IAssertionFramework AssertionFramework { get; }
+	}
 
 Implementations are available in both NUnit and MSTest flavours, providing an implementation of the AssertionFramework for each particular unit testing framework.
 
@@ -22,13 +19,11 @@ Implementations are available in both NUnit and MSTest flavours, providing an im
 
 The higher level libraries expose a more detailed interface called ISupportFactoryWithMocks that allows instantiation of other dependent testing elements...
 
-```
-#!csharp
-public interface ISupportFactoryWithMocks : ISupportFactory
-{
-	MvcRouteAsserter RouteAssert { get; }
-}
-```
+	public interface ISupportFactoryWithMocks : ISupportFactory
+	{
+		MvcRouteAsserter RouteAssert { get; }
+	}
+
 The implementations of the interface also inherit from their lower level counterparts. This allows a clean separation between elements that require a mocking context and those that don't.
 
 The following functionality is offered by the libraries...
@@ -37,31 +32,28 @@ The following functionality is offered by the libraries...
 
 Although only several key assertions are supported (feel free to join the project and add some more of your own!), all of the key functionality within the testing support libraries is accessed by an implementation of the IAssertionFramework interface...
 
-```
-#!csharp
-public interface IAssertionFramework
-{
-	void IsNull<T>(T anObject);
-	void IsNull<T>(T anObject, string message);
+	public interface IAssertionFramework
+	{
+		void IsNull<T>(T anObject);
+		void IsNull<T>(T anObject, string message);
 
-	void IsNotNull<T>(T anObject);
-	void IsNotNull<T>(T anObject, string message);
+		void IsNotNull<T>(T anObject);
+		void IsNotNull<T>(T anObject, string message);
 
-	void IsTrue(bool condition);
-	void IsTrue(bool condition, string message);
-	void IsTrue(bool condition, string message, params object[] args);
+		void IsTrue(bool condition);
+		void IsTrue(bool condition, string message);
+		void IsTrue(bool condition, string message, params object[] args);
 
-	void IsFalse(bool condition);
-	void IsFalse(bool condition, string message);
-	void IsFalse(bool condition, string message, params object[] args);
+		void IsFalse(bool condition);
+		void IsFalse(bool condition, string message);
+		void IsFalse(bool condition, string message, params object[] args);
 
-	void AreEqual<T>(T expected, T actual);
-	void AreEqual<T>(T expected, T actual, string message);
+		void AreEqual<T>(T expected, T actual);
+		void AreEqual<T>(T expected, T actual, string message);
 
-	void AreCaseInsensitiveEqual<T>(T expected, T actual);
-	void AreCaseInsensitiveEqual<T>(T expected, T actual, string message);
-}
-```
+		void AreCaseInsensitiveEqual<T>(T expected, T actual);
+		void AreCaseInsensitiveEqual<T>(T expected, T actual, string message);
+	}
 
 The IAssertionFramework interface allows the actual testing framework used to be abstracted out until the point at which the actual test is written. At the time of writing there are two implementations included for this interface, one for NUnit and one for MSTest (located in the NUnit and MSTest namespaces respectively). Support for other frameworks may be added later, but it is a goal of the project to maintain feature parity for both NUnit and MSTest throughout and to minimise code duplication. Abstracting the framework enables this goal.
 
@@ -82,60 +74,55 @@ Managing this process in the different frameworks is slightly different due to e
 This simply involves creating a test class that inherits from the base class for the framework you intend to use. This will then give you access to all of the properties and methods to manipulate the underlying application (specified by overriding the AppName property). Sample code is given for each test in the source code under 'tests'.
 
 NUnit...
-```
-#!csharp
-[TestFixture]
-public class ConsoleTestClass : NUnitConsoleTestBase
-{
-	[Test]
-	public void TestTrue()
+	[TestFixture]
+	public class ConsoleTestClass : NUnitConsoleTestBase
 	{
-		AssertApplicationRunsSuccessfully();
-		Assert.IsTrue(true);
-	}
+		[Test]
+		public void TestTrue()
+		{
+			AssertApplicationRunsSuccessfully();
+			Assert.IsTrue(true);
+		}
 
-	[Test]
-	public void TestPrintsHello()
-	{
-		AssertApplicationRunsSuccessfully();
-		AssertConsoleOutputContains("Hello");
-		AssertConsoleOutputDoesNotContain("Goodbye");
-	}
+		[Test]
+		public void TestPrintsHello()
+		{
+			AssertApplicationRunsSuccessfully();
+			AssertConsoleOutputContains("Hello");
+			AssertConsoleOutputDoesNotContain("Goodbye");
+		}
 
-	protected override string AppFileName
-	{
-		get { return @"C:\Development\Projects\TestSupport\tests\printhello.bat"; }
+		protected override string AppFileName
+		{
+			get { return @"C:\Development\Projects\TestSupport\tests\printhello.bat"; }
+		}
 	}
-}
-```
 
 MSTest...
-```
-#!csharp
-[TestClass]
-public class ConsoleTestClass : MSTestConsoleTestBase
-{
-	[TestMethod]
-	public void TestTrue()
-	{
-		AssertApplicationRunsSuccessfully();
-		Assert.IsTrue(true);
-	}
 
-	[TestMethod]
-	public void TestPrintsHello()
+	[TestClass]
+	public class ConsoleTestClass : MSTestConsoleTestBase
 	{
-		AssertApplicationRunsSuccessfully();
-		AssertConsoleOutputContains("Hello");
-		AssertConsoleOutputDoesNotContain("Goodbye");
-	}
+		[TestMethod]
+		public void TestTrue()
+		{
+			AssertApplicationRunsSuccessfully();
+			Assert.IsTrue(true);
+		}
 
-	protected override string AppFileName
-	{
-		get { return @"C:\Development\Projects\TestSupport\tests\printhello.bat"; }
+		[TestMethod]
+		public void TestPrintsHello()
+		{
+			AssertApplicationRunsSuccessfully();
+			AssertConsoleOutputContains("Hello");
+			AssertConsoleOutputDoesNotContain("Goodbye");
+		}
+
+		protected override string AppFileName
+		{
+			get { return @"C:\Development\Projects\TestSupport\tests\printhello.bat"; }
+		}
 	}
-}
-```
 
 ###Key Properties & Methods###
 The following properties & methods are key...
@@ -168,21 +155,18 @@ The returned Mock objects contain collections and mthods to mock and stub common
 
 The MockHttpContext object also has an 'ApplyTo' method so you can add it to a controller when testing MVC controllers. For example...
 
-```
-#!csharp
-[Test]
-public override void TestController()
-{
-   // Create a default context with a default request and response
-   var mockContext = new MockHttpContext();
+	[Test]
+	public override void TestController()
+	{
+	   // Create a default context with a default request and response
+	   var mockContext = new MockHttpContext();
 
-   // Create the controller to test
-   var objUt = new HomeController();
+	   // Create the controller to test
+	   var objUt = new HomeController();
 
-   // Apply the context.
-   mockContext.ApplyTo(objUt);
-}
-```
+	   // Apply the context.
+	   mockContext.ApplyTo(objUt);
+	}
 
 ##Testing Routes in ASP.Net MVC##
 Ministry.TestingSupport offers a simple solution to make route testing, for both incoming and outgoing routes, really clean and simple. This is achieved through the use of two classes. The primary class is the 'MvcRouteAsserter', an instance of which is provided by the ISupportFactoryWithMocks implementation for your chosen testing framework. Moq is required for this to work at the moment but if you would like this for your chosen mocking framework feel free to join the project and add support or raise an issue and I'll add support when I can.
@@ -200,132 +184,122 @@ Creating a route test is very straightforward. By inheriting from TouteTestBase,
 1. Override the 'TestSupportFactory' property with the implementation for your testing framework of choice with mocks.
 2. Override 'SetupFixture()' and ensure it's decorated to run at the beginning of the fixture or test class. It should read something like this and ensure that the Routes property is populated from the application...
 
-```
-#!csharp
-[TestFixtureSetUp]
-public override void SetUpFixture()
-{
-   Routes = new RouteCollection();
-   MvcApplication app = new MvcApplication();
-   app.RegisterAllRoutes(Routes);
-}
-```
+	[TestFixtureSetUp]
+	public override void SetUpFixture()
+	{
+	   Routes = new RouteCollection();
+	   MvcApplication app = new MvcApplication();
+	   app.RegisterAllRoutes(Routes);
+	}
 
 ###Creating your own base class###
 It makes a lot of sense to create your own base class for route tests, inheriting from RouteTestBase. Here's my base class for the Ministry website...
 
-```
-#!csharp
-[TestFixture]
-public class MinistryotechRouteTestBase : RouteTestBase
-{
-	#region | Setup & TearDown |
-
-	/// <summary>
-	/// Sets up the test fixture.
-	/// </summary>
-	[TestFixtureSetUp]
-	public override void SetUpFixture()
+	[TestFixture]
+	public class MinistryotechRouteTestBase : RouteTestBase
 	{
-		Routes = new RouteCollection();
-		MvcApplication app = new MvcApplication();
-		app.RegisterAllRoutes(Routes);
-	}
+		#region | Setup & TearDown |
 
-	#endregion
+		/// <summary>
+		/// Sets up the test fixture.
+		/// </summary>
+		[TestFixtureSetUp]
+		public override void SetUpFixture()
+		{
+			Routes = new RouteCollection();
+			MvcApplication app = new MvcApplication();
+			app.RegisterAllRoutes(Routes);
+		}
 
-	/// <summary>
-	/// Gets the test support factory.
-	/// </summary>
-	protected override ISupportFactory TestSupportFactory
-	{
-		get { return new NUnitSupportFactory(); }
+		#endregion
+
+		/// <summary>
+		/// Gets the test support factory.
+		/// </summary>
+		protected override ISupportFactory TestSupportFactory
+		{
+			get { return new NUnitSupportFactory(); }
+		}
 	}
-}
-```
 
 This then makes the test classes themselves really clean and readable. Here's my own NUnit tests...
 
-```
-#!csharp
-[TestFixture]
-public class BlogRouteTests : MinistryotechRouteTestBase
-{
-	[Test]
-	[TestCase("~/blog", "index")]
-	[TestCase("~/blog/", "index")]
-	[TestCase("~/blog/page", "showpage")]
-	[TestCase("~/blog/page/", "showpage")]
-	[TestCase("~/blog/page1", "showpage")]
-	[TestCase("~/blog/page2/", "showpage")]
-	[TestCase("~/blog/page87", "showpage")]
-	[TestCase("~/blog/feed.rss", "feed")]
-	public void TestViewPageBlogRoutes(string url, string action)
+	[TestFixture]
+	public class BlogRouteTests : MinistryotechRouteTestBase
 	{
-		AssertRouteIsValid(url, "list", action, "blog", HttpVerbs.Get);
-	}
+		[Test]
+		[TestCase("~/blog", "index")]
+		[TestCase("~/blog/", "index")]
+		[TestCase("~/blog/page", "showpage")]
+		[TestCase("~/blog/page/", "showpage")]
+		[TestCase("~/blog/page1", "showpage")]
+		[TestCase("~/blog/page2/", "showpage")]
+		[TestCase("~/blog/page87", "showpage")]
+		[TestCase("~/blog/feed.rss", "feed")]
+		public void TestViewPageBlogRoutes(string url, string action)
+		{
+			AssertRouteIsValid(url, "list", action, "blog", HttpVerbs.Get);
+		}
 
-	[Test]
-	public void TestViewPageBlogVariables()
-	{
-		AssertRouteIsValid("~/blog/page1", "list", "showpage", "blog", HttpVerbs.Get, new { page = 1 });
-		AssertRouteIsValid("~/blog/page", "list", "showpage", "blog", HttpVerbs.Get, new { page = 1 });
-		AssertRouteIsValid("~/blog/page4", "list", "showpage", "blog", HttpVerbs.Get, new { page = 4 });
-	}
+		[Test]
+		public void TestViewPageBlogVariables()
+		{
+			AssertRouteIsValid("~/blog/page1", "list", "showpage", "blog", HttpVerbs.Get, new { page = 1 });
+			AssertRouteIsValid("~/blog/page", "list", "showpage", "blog", HttpVerbs.Get, new { page = 1 });
+			AssertRouteIsValid("~/blog/page4", "list", "showpage", "blog", HttpVerbs.Get, new { page = 4 });
+		}
 
-	[Test]
-	[TestCase("/blog", "index")]
-	[TestCase("/blog/page", "showpage")]
-	public void TestMainBlogAreaRoutesUrlGeneration(string url, string action)
-	{
-		AssertOutgoingRouteUrlGeneration(url, "list", action, null, new { area = "blog" });
-	}
+		[Test]
+		[TestCase("/blog", "index")]
+		[TestCase("/blog/page", "showpage")]
+		public void TestMainBlogAreaRoutesUrlGeneration(string url, string action)
+		{
+			AssertOutgoingRouteUrlGeneration(url, "list", action, null, new { area = "blog" });
+		}
 
-	[Test]
-	public void TestBlogAreaPagedRoutesUrlGeneration()
-	{
-		AssertOutgoingRouteUrlGeneration("/blog/page3", "list", "showpage", null, new { page = 3, area = "blog" });
-	}
+		[Test]
+		public void TestBlogAreaPagedRoutesUrlGeneration()
+		{
+			AssertOutgoingRouteUrlGeneration("/blog/page3", "list", "showpage", null, new { page = 3, area = "blog" });
+		}
 
-	[Test]
-	public void TestInvalidViewPageBlogVariables()
-	{
-		// These will fall back to the hideous Umbraco catch-all
-		AssertRouteIsValid("~/blog/pagedinky", "blog", "pagedinky");
-		AssertRouteIsValid("~/blog/pageCabbage", "blog", "pageCabbage");
-	}
+		[Test]
+		public void TestInvalidViewPageBlogVariables()
+		{
+			// These will fall back to the hideous Umbraco catch-all
+			AssertRouteIsValid("~/blog/pagedinky", "blog", "pagedinky");
+			AssertRouteIsValid("~/blog/pageCabbage", "blog", "pageCabbage");
+		}
 
-	[Test]
-	[TestCase("~/blog/eating-fish", "eating-fish")]
-	[TestCase("~/blog/support/", "support")]
-	public void TestBlogItemRoutesUseTheUmbracoRoutes(string url, string action)
-	{
-		AssertRouteIsValid(url, "blog", action);
-	}
+		[Test]
+		[TestCase("~/blog/eating-fish", "eating-fish")]
+		[TestCase("~/blog/support/", "support")]
+		public void TestBlogItemRoutesUseTheUmbracoRoutes(string url, string action)
+		{
+			AssertRouteIsValid(url, "blog", action);
+		}
 
-	[Test]
-	[TestCase("~/i-dont-exist/things1/things2/things3")]
-	public void TestBadRoutesDontWork(string url)
-	{
-		AssertRouteIsInvalid(url);
-	}
+		[Test]
+		[TestCase("~/i-dont-exist/things1/things2/things3")]
+		public void TestBadRoutesDontWork(string url)
+		{
+			AssertRouteIsInvalid(url);
+		}
 
-	[Test]
-	[TestCase("/blog/eating-fish", "eating-fish")]
-	[TestCase("/blog/support", "support")]
-	public void TestBlogItemRoutesUrlGeneration(string url, string action)
-	{
-		AssertOutgoingRouteUrlGeneration(url, "blog", action);
+		[Test]
+		[TestCase("/blog/eating-fish", "eating-fish")]
+		[TestCase("/blog/support", "support")]
+		public void TestBlogItemRoutesUrlGeneration(string url, string action)
+		{
+			AssertOutgoingRouteUrlGeneration(url, "blog", action);
+		}
 	}
-}
-```
 
 ## The Ministry of Technology Open Source Products ##
-Welcome to The Ministry of Technology open source products. All open source Ministry of Technology products are distributed under the MIT License for maximum re-usability. Details on more of our products and services can be found on our website at http://www.ministryotech.co.uk
+Welcome to The Ministry of Technology open source products. All open source Ministry of Technology products are distributed under the MIT License for maximum re-usability. Details on more of our products and services can be found on our website at http://www.minotech.co.uk
 
 Our other open source repositories can be found here...
 
-* [https://bitbucket.org/ministryotech](https://bitbucket.org/ministryotech)
 * [https://github.com/ministryotech](https://github.com/ministryotech)
 * [https://github.com/tiefling](https://github.com/tiefling)
 
@@ -343,4 +317,4 @@ If you would like to contribute to the project, please contact me.
 The source code can be used in a simple text editor or within Visual Studio using NodeJS Tools for Visual Studio.
 
 ### Who do I talk to? ###
-* Keith Jackson - keith@ministryotech.co.uk
+* Keith Jackson - keith@minotech.co.uk
